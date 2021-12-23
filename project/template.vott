@@ -1,0 +1,37 @@
+{
+    "name": "${project_name}",
+    "securityToken": "${security_token}",
+    "sourceConnection": {
+        "name": "${input_connection}",
+        "providerType": "localFileSystemProxy",
+        "providerOptions": {
+            "encrypted": "${input_encrypted}"
+            },
+        "id": "${input_id}"
+    },
+    "targetConnection": {
+        "name": "${output_connection}",
+        "providerType": "localFileSystemProxy",
+        "providerOptions": {
+            "encrypted": "${output_encrypted}"
+            },
+        "id": "${output_id}"
+    },
+    "videoSettings": {
+        "frameExtractionRate": 15
+    },
+    "tags": [],
+    "id": "${format_id}",
+    "activeLearningSettings": {
+        "autoDetect": false,
+        "predictTag": true,
+        "modelPathType": "coco"
+    },
+    "exportFormat": {
+        "providerType": "vottJson",
+        "providerOptions": {
+            "encrypted": "${format_encrypted}"
+            }
+    },
+    "version": "2.2.0"
+}
