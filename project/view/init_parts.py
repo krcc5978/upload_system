@@ -18,7 +18,7 @@ def changeText(entry, dir_flag=False):
 
 class InitParts:
 
-    def __init__(self, master, text, row, col, padx, pady):
+    def __init__(self, master, text, row, col, padx, pady, dir_flag=False):
         self.head = tk.Label(master, text=text, font=('Helvetica', 10))
         self.head.grid(row=row, column=col, rowspan=2, sticky=tk.NW, padx=padx, pady=pady)
 
@@ -30,5 +30,5 @@ class InitParts:
         self.entry.config(xscrollcommand=self.scroll.set)
 
         self.button = tk.Button(master, text=u'参照', font=('Helvetica', 8),
-                                command=lambda: changeText(self.entry, False))
+                                command=lambda: changeText(self.entry, dir_flag))
         self.button.grid(row=row, column=col + 2, sticky=tk.W, padx=(padx[0], padx[1] + 10), pady=pady)

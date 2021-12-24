@@ -13,7 +13,7 @@ class Application(tk.Frame):
 
         self.ulm = UploadSystemModel()
 
-        self.master.geometry("640x380")
+        self.master.geometry("520x200")
         self.master.title('ファイルアップロード')
 
         # Notebookウィジェットの作成
