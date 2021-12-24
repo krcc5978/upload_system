@@ -70,13 +70,14 @@ class FileManager:
 
         return new_input_upload_path
 
-    def save_img(self, image_path, save_path):
+    def save_img(self, total, image_path, save_path):
         if not self.file_dir_check(image_path):
             return False
 
         if not self.file_dir_check(save_path):
             return False
 
+        total.value = 1
         shutil.copy(image_path, save_path)
         self.load_config_file(f'>> {image_path} to {save_path}')
         return True

@@ -40,7 +40,7 @@ def upload_vott(config_path, input_path, finish_flag, count, total, **kwargs):
     if 'video' in mime:
         fm.load_movie(count, total, input_path, temp_path, file_name, **kwargs)
     elif 'image' in mime:
-        fm.save_img(input_path, temp_path)
+        fm.save_img(total, input_path, temp_path)
     else:
         logger.error(f'>> file type is not image or movie')
         system_finish(finish_flag)

@@ -1,11 +1,10 @@
 
 import tkinter as tk
 import tkinter.ttk as ttk
-from project.GUI_parts.init_parts import InitParts
-from project.controller.upload_system_controller import execute_upload
+
 from project.model.upload_system_model import UploadSystemModel
-from project.view.upload_system_view import UploadSystemView
 from project.view.download_system_view import DownloadSystemView
+from project.view.upload_system_view import UploadSystemView
 
 
 class Application(tk.Frame):
