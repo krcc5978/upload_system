@@ -1,8 +1,11 @@
 
 import tkinter as tk
+import tkinter.ttk as ttk
 from project.GUI_parts.init_parts import InitParts
 from project.controller.upload_system_controller import execute_upload
 from project.model.upload_system_model import UploadSystemModel
+from project.view.upload_system_view import UploadSystemView
+from project.view.download_system_view import DownloadSystemView
 
 
 class Application(tk.Frame):
@@ -14,20 +17,22 @@ class Application(tk.Frame):
         self.master.geometry("640x380")
         self.master.title('ファイルアップロード')
 
-        self.input = InitParts(self.master, '入力ファイル', 0, 0, (10, 0), (10, 0))
-        self.config = InitParts(self.master, '設定ファイル', 3, 0, (10, 0), (10, 0))
-        self.config.entry.insert(0, 'config.ini')
+        # Notebookウィジェットの作成
+        self.notebook = ttk.Notebook(self.master)
 
-        self.counter_label = tk.Label(self.master, textvariable=self.ulm.counter_text, font=('Helvetica', 10))
-        self.counter_label.grid(row=5, column=1, sticky=tk.E, padx=(10, 0))
+        # タブの作成
+        self.tab_one = tk.Frame(self.notebook)
+        self.tab_two = tk.Frame(self.notebook)
 
-        self.execute_button = tk.Button(self.master, text=u'実行', font=('Helvetica', 8),
-                                        command=lambda: execute_upload(self.config.entry.get(),
-                                                                       self.input.entry.get(),
-                                                                       self.ulm,
-                                                                       self.execute_button
-                                                                       ))
-        self.execute_button.grid(row=5, column=2, padx=(10, 0), sticky=tk.W)
+        # notebookにタブを追加
+        self.notebook.add(self.tab_one, text="upload")
+        self.notebook.add(self.tab_two, text="download")
+
+        self.upload_view = UploadSystemView(self.tab_one, self.ulm)
+        self.download_view = DownloadSystemView(self.tab_two, self.ulm)
+        # ウィジェットの配置
+        self.notebook.pack(expand=True, fill='both', padx=10, pady=10)
+        # notebook.grid(row=0, column=0, padx=10, pady=10)
 
 
 def main():
