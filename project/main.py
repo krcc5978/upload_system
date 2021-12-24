@@ -12,6 +12,7 @@ class Application(tk.Frame):
         super().__init__(master)
 
         self.ulm = UploadSystemModel()
+        self.dlm = UploadSystemModel()
 
         self.master.geometry("520x200")
         self.master.title('ファイルアップロード')
@@ -28,10 +29,9 @@ class Application(tk.Frame):
         self.notebook.add(self.tab_two, text="download")
 
         self.upload_view = UploadSystemView(self.tab_one, self.ulm)
-        self.download_view = DownloadSystemView(self.tab_two, self.ulm)
+        self.download_view = DownloadSystemView(self.tab_two, self.dlm)
         # ウィジェットの配置
         self.notebook.pack(expand=True, fill='both', padx=10, pady=10)
-        # notebook.grid(row=0, column=0, padx=10, pady=10)
 
 
 def main():
