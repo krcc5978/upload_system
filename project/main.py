@@ -1,10 +1,10 @@
-
 import tkinter as tk
 import tkinter.ttk as ttk
 
 from project.model.upload_system_model import UploadSystemModel
 from project.view.download_system_view import DownloadSystemView
 from project.view.upload_system_view import UploadSystemView
+from project.view.config_system_view import ConfigSystemView
 
 
 class Application(tk.Frame):
@@ -14,7 +14,7 @@ class Application(tk.Frame):
         self.ulm = UploadSystemModel()
         self.dlm = UploadSystemModel()
 
-        self.master.geometry("520x200")
+        self.master.geometry("640x380")
         self.master.title('ファイルアップロード')
 
         # Notebookウィジェットの作成
@@ -23,13 +23,16 @@ class Application(tk.Frame):
         # タブの作成
         self.tab_one = tk.Frame(self.notebook)
         self.tab_two = tk.Frame(self.notebook)
+        self.tab_three = tk.Frame(self.notebook)
 
         # notebookにタブを追加
         self.notebook.add(self.tab_one, text="upload")
         self.notebook.add(self.tab_two, text="download")
+        self.notebook.add(self.tab_three, text="config")
 
         self.upload_view = UploadSystemView(self.tab_one, self.ulm)
         self.download_view = DownloadSystemView(self.tab_two, self.dlm)
+        self.config_view = ConfigSystemView(self.tab_three, './config.ini')
         # ウィジェットの配置
         self.notebook.pack(expand=True, fill='both', padx=10, pady=10)
 

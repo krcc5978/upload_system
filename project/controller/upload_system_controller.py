@@ -1,6 +1,8 @@
 import time
+
 import threading
 from project.upload_vott import upload_vott
+
 
 
 def check_flag(model, button):
@@ -20,6 +22,7 @@ def check_flag(model, button):
 
 
 def execute_upload(config, input_path, model, button):
+
     upload_thread = threading.Thread(target=upload_vott,
                                      args=(config,
                                            input_path,
@@ -30,6 +33,6 @@ def execute_upload(config, input_path, model, button):
     upload_thread.start()
 
     check_thread = threading.Thread(target=check_flag,
-                                    args=(model,button,)
+                                    args=(model, button,)
                                     )
     check_thread.start()
