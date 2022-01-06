@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 from tkinter import filedialog
 from project.controller.upload_system_controller import execute_upload
+from project.model.config_system_model import ConfigSystemModel
 
 
 def changeText(entry, dir_flag=False):
@@ -37,10 +38,11 @@ class InitParts:
 
 class UploadSystemView:
 
-    def __init__(self, master, ulm):
+    def __init__(self, master, ulm, config_path):
+        self.config = ConfigSystemModel(config_path)
         self.input = InitParts(master, '入力ファイル', 0, 0, (10, 0), (10, 0))
-        self.config = InitParts(master, '設定ファイル', 3, 0, (10, 0), (10, 0))
-        self.config.entry.insert(0, 'config.ini')
+        self.output = InitParts(master, '出力先', 3, 0, (10, 0), (10, 0), dir_flag=True)
+        self.output.entry.insert(0, f'//{self.config.ip}/{self.config.share_folder}/{self.config.directory}')
 
         self.start_time = tk.Label(master, text='開始時間', font=('Helvetica', 10))
         self.start_time.grid(row=5, column=0, rowspan=2, sticky=tk.NW, padx=(10, 0), pady=(10, 0))

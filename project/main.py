@@ -11,6 +11,8 @@ class Application(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
 
+        config_path = './config.ini'
+
         self.ulm = UploadSystemModel()
         self.dlm = UploadSystemModel()
 
@@ -30,9 +32,9 @@ class Application(tk.Frame):
         self.notebook.add(self.tab_two, text="download")
         self.notebook.add(self.tab_three, text="config")
 
-        self.upload_view = UploadSystemView(self.tab_one, self.ulm)
+        self.upload_view = UploadSystemView(self.tab_one, self.ulm, config_path)
         self.download_view = DownloadSystemView(self.tab_two, self.dlm)
-        self.config_view = ConfigSystemView(self.tab_three, './config.ini')
+        self.config_view = ConfigSystemView(self.tab_three, config_path)
         # ウィジェットの配置
         self.notebook.pack(expand=True, fill='both', padx=10, pady=10)
 

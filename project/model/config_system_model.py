@@ -12,5 +12,6 @@ class ConfigSystemModel:
         self.ip = self.config['SERVER']['IP']
         self.pc_name = self.config['SERVER']['PC_NAME']
         self.share_folder = self.config['SERVER']['SHARE_FOLDER']
+        self.directory = self.config['SERVER']['DIRECTORY']
         self.login_id = self.config['USER']['ID']
         self.login_pass = self.config['USER']['PASS']
