@@ -21,7 +21,6 @@ def check_flag(model, button):
 
 
 def execute_upload(config_path, input_path, output_path, model, button, *args):
-
     if input_path == '':
         model.counter_text.set(f'アップロードファイルが選択されていません')
         return
@@ -31,12 +30,12 @@ def execute_upload(config_path, input_path, output_path, model, button, *args):
         return
 
     time_conf_dict = {}
-    if args[0] != '0':
+    if 0 < int(args[0]):
         time_conf_dict['start_time'] = int(args[0])
-    if args[1] != '0':
-        time_conf_dict['skip_time'] = int(args[0])
-    if args[2] != '0':
-        time_conf_dict['end_time'] = int(args[0])
+    if 0 < int(args[1]):
+        time_conf_dict['skip_time'] = int(args[1])
+    if 0 < int(args[2]):
+        time_conf_dict['end_time'] = int(args[2])
 
     upload_thread = threading.Thread(target=upload_vott,
                                      args=(config_path,
