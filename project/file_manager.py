@@ -67,14 +67,6 @@ class FileManager:
             self.log.info(f'>> {src_path} to {new_input_upload_path}')
             shutil.copytree(src_path, new_input_upload_path)
         except Exception as e:
-            # conn = SMBConnection(
-            #     id,
-            #     password,
-            #     platform.uname().node,
-            #     pc_name
-            # )
-            # conn.connect(ip, 139)
-            # conn.close()
             self.log.error(e)
             return None
 
