@@ -1,11 +1,7 @@
-import tkinter as tk
-# from project.view.init_parts import InitParts
-from project.controller.download_system_controller import execute_download
-
 import os
-# import tkinter as tk
+import tkinter as tk
 from tkinter import filedialog
-# from project.controller.upload_system_controller import execute_upload
+from project.controller.download_system_controller import execute_download
 
 
 def changeText(entry, dir_flag=False):

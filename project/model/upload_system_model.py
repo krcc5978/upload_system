@@ -1,4 +1,3 @@
-import configparser
 import tkinter as tk
 from multiprocessing import Value
 

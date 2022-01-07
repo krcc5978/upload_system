@@ -42,7 +42,6 @@ class InitParts:
         if kwargs.get('scroll'):
             self.scroll = tk.Scrollbar(master, orient=tk.HORIZONTAL, command=self.entry.xview)
             self.scroll.grid(row=row + 1, column=col + 1, padx=padx, sticky=tk.EW)
-            # self.scroll.grid(row=row + 1, column=col + 1, padx=padx, sticky=tk.W + tk.E)
             self.entry.config(xscrollcommand=self.scroll.set)
 
         if kwargs.get('ref_button'):

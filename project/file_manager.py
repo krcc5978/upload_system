@@ -4,8 +4,6 @@ import shutil
 import mimetypes
 from tqdm import tqdm
 from project.system_config import SystemConfig
-import platform
-from smb.SMBConnection import SMBConnection
 
 
 def get_value(movie_option, key, default):

@@ -1,5 +1,4 @@
 import time
-
 import threading
 from project.upload_vott import upload_vott
 
