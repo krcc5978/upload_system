@@ -64,21 +64,20 @@ class FileManager:
         new_input_upload_path = dst_path + '/input'
 
         try:
-            conn = SMBConnection(
-                'Inbility',
-                'Inbility2006',
-                platform.uname().node,
-                'desktop-l6s3vb8'
-            )
-            conn.connect('192.168.2.129', 139)
             self.log.info(f'>> {src_path} to {new_input_upload_path}')
-            print(os.listdir('\\\\192.168.2.129'))
             shutil.copytree(src_path, new_input_upload_path)
         except Exception as e:
+            # conn = SMBConnection(
+            #     id,
+            #     password,
+            #     platform.uname().node,
+            #     pc_name
+            # )
+            # conn.connect(ip, 139)
+            # conn.close()
             self.log.error(e)
-            conn.close()
             return None
-        conn.close()
+
         return new_input_upload_path
 
     def save_img(self, total, image_path, save_path):

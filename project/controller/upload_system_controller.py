@@ -4,7 +4,6 @@ import threading
 from project.upload_vott import upload_vott
 
 
-
 def check_flag(model, button):
     button['state'] = 'disable'
     model.counter_text.set('アップロード準備中')
@@ -21,15 +20,32 @@ def check_flag(model, button):
     button['state'] = 'normal'
 
 
-def execute_upload(config, input_path, model, button):
+def execute_upload(config_path, input_path, output_path, model, button, *args):
+
+    if input_path == '':
+        model.counter_text.set(f'アップロードファイルが選択されていません')
+        return
+
+    if output_path == '':
+        model.counter_text.set(f'出力先ディレクトリが選択されていません')
+        return
+
+    time_conf_dict = {}
+    if args[0] != '0':
+        time_conf_dict['start_time'] = int(args[0])
+    if args[1] != '0':
+        time_conf_dict['skip_time'] = int(args[0])
+    if args[2] != '0':
+        time_conf_dict['end_time'] = int(args[0])
 
     upload_thread = threading.Thread(target=upload_vott,
-                                     args=(config,
+                                     args=(config_path,
                                            input_path,
+                                           output_path,
                                            model.flag,
                                            model.count,
-                                           model.total),
-                                     kwargs={'start_time': 10, 'skip_time': 10})
+                                           model.total,),
+                                     kwargs=time_conf_dict)
     upload_thread.start()
 
     check_thread = threading.Thread(target=check_flag,

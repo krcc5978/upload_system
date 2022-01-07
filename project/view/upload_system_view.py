@@ -39,12 +39,12 @@ class InitParts:
 class UploadSystemView:
 
     def __init__(self, master, ulm, config_path):
-        self.config = ConfigSystemModel(config_path)
+        # self.config = ConfigSystemModel(config_path)
+
         self.input = InitParts(master, '入力ファイル', 0, 0, (10, 0), (10, 0))
         self.output = InitParts(master, '出力先', 3, 0, (10, 0), (10, 0), dir_flag=True)
-        self.output.entry.insert(0, f'//{self.config.ip}/{self.config.share_folder}/{self.config.directory}')
 
-        self.start_time = tk.Label(master, text='開始時間', font=('Helvetica', 10))
+        self.start_time = tk.Label(master, text='開始時間[s]', font=('Helvetica', 10))
         self.start_time.grid(row=5, column=0, rowspan=2, sticky=tk.NW, padx=(10, 0), pady=(10, 0))
         self.start_time_entry = tk.Entry(master, width=10)
         self.start_time_entry.grid(row=5, column=1, sticky=tk.NW, padx=(10, 0), pady=(10, 0))
@@ -52,17 +52,27 @@ class UploadSystemView:
 
         self.skip_time = tk.Label(master, text='スキップフレーム', font=('Helvetica', 10))
         self.skip_time.grid(row=6, column=0, rowspan=2, sticky=tk.NW, padx=(10, 0), pady=(10, 0))
-        self.skip_time = tk.Entry(master, width=10)
-        self.skip_time.grid(row=6, column=1, sticky=tk.NW, padx=(10, 0), pady=(10, 0))
-        self.skip_time.insert(0, 0)
+        self.skip_time_entry = tk.Entry(master, width=10)
+        self.skip_time_entry.grid(row=6, column=1, sticky=tk.NW, padx=(10, 0), pady=(10, 0))
+        self.skip_time_entry.insert(0, 0)
+
+        self.end_time = tk.Label(master, text='終了時間[s]', font=('Helvetica', 10))
+        self.end_time.grid(row=7, column=0, rowspan=2, sticky=tk.NW, padx=(10, 0), pady=(10, 0))
+        self.end_time_entry = tk.Entry(master, width=10)
+        self.end_time_entry.grid(row=7, column=1, sticky=tk.NW, padx=(10, 0), pady=(10, 0))
+        self.end_time_entry.insert(0, 0)
 
         self.counter_label = tk.Label(master, textvariable=ulm.counter_text, font=('Helvetica', 10))
-        self.counter_label.grid(row=7, column=1, sticky=tk.E, padx=(10, 0))
+        self.counter_label.grid(row=8, column=1, sticky=tk.E, padx=(10, 0))
 
         self.execute_button = tk.Button(master, text=u'実行', font=('Helvetica', 8),
-                                        command=lambda: execute_upload(self.config.entry.get(),
+                                        command=lambda: execute_upload(config_path,
                                                                        self.input.entry.get(),
+                                                                       self.output.entry.get(),
                                                                        ulm,
-                                                                       self.execute_button
+                                                                       self.execute_button,
+                                                                       self.start_time_entry.get(),
+                                                                       self.skip_time_entry.get(),
+                                                                       self.end_time_entry.get(),
                                                                        ))
-        self.execute_button.grid(row=7, column=2, padx=(10, 0), sticky=tk.W)
+        self.execute_button.grid(row=8, column=2, padx=(10, 0), sticky=tk.W)

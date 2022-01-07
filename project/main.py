@@ -16,25 +16,27 @@ class Application(tk.Frame):
         self.ulm = UploadSystemModel()
         self.dlm = UploadSystemModel()
 
-        self.master.geometry("640x380")
+        self.master.geometry("580x320")
         self.master.title('ファイルアップロード')
+        self.master.resizable(width=False, height=False)
 
         # Notebookウィジェットの作成
         self.notebook = ttk.Notebook(self.master)
 
         # タブの作成
         self.tab_one = tk.Frame(self.notebook)
-        self.tab_two = tk.Frame(self.notebook)
-        self.tab_three = tk.Frame(self.notebook)
+        # self.tab_two = tk.Frame(self.notebook)
+        # self.tab_three = tk.Frame(self.notebook)
 
         # notebookにタブを追加
         self.notebook.add(self.tab_one, text="upload")
-        self.notebook.add(self.tab_two, text="download")
-        self.notebook.add(self.tab_three, text="config")
+        # self.notebook.add(self.tab_two, text="download")
+        # self.notebook.add(self.tab_three, text="config")
 
         self.upload_view = UploadSystemView(self.tab_one, self.ulm, config_path)
-        self.download_view = DownloadSystemView(self.tab_two, self.dlm)
-        self.config_view = ConfigSystemView(self.tab_three, config_path)
+        # self.download_view = DownloadSystemView(self.tab_two, self.dlm)
+        # self.config_view = ConfigSystemView(self.tab_three, config_path)
+
         # ウィジェットの配置
         self.notebook.pack(expand=True, fill='both', padx=10, pady=10)
 

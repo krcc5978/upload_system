@@ -13,7 +13,7 @@ def system_finish(flag):
     sys.exit(1)
 
 
-def upload_vott(config_path, input_path, finish_flag, count, total, **kwargs):
+def upload_vott(config_path, input_path, output_path, finish_flag, count, total, **kwargs):
     logger.info(f'>> start upload system')
 
     fm = FileManager(logger)
@@ -50,9 +50,7 @@ def upload_vott(config_path, input_path, finish_flag, count, total, **kwargs):
     # アップロードするものがない場合はエラー出力をして終了
     if conf.get_config("VOTT") is None:
         system_finish(finish_flag)
-    if conf.get_config('SERVER', 'directory') is None:
-        system_finish(finish_flag)
-    upload_path = conf.get_config('SERVER', 'directory') + file_name
+    upload_path = f'{output_path}/{file_name}'
     vott_input_path = fm.upload_file_list(temp_path, upload_path)
     if vott_input_path:
         flag = v.make_vott_file(logger, conf, file_name, upload_path, vott_input_path)
