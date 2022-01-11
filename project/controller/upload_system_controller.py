@@ -5,27 +5,22 @@ from project.upload_vott import upload_vott
 
 def check_flag(model, button):
     button['state'] = 'disable'
-    model.counter_text.set('アップロード準備中')
 
+    # アップロード処理終了まで待機
     while model.flag.value:
-        if model.total.value == 0:
-            time.sleep(1 / 1000)
-        if model.total.value != 0:
-            model.counter_text.set(f'アップロード中　： ({str(model.count.value)} / {str(model.total.value)})')
+        time.sleep(1 / 1000)
 
-    model.counter_text.set(f'アップロード完了')
-    model.count.value = 0
     model.flag.value = True
     button['state'] = 'normal'
 
 
 def execute_upload(config_path, input_path, output_path, model, button, *args):
     if input_path == '':
-        model.counter_text.set(f'アップロードファイルが選択されていません')
+        model.message.set(f'アップロードファイルが選択されていません')
         return
 
     if output_path == '':
-        model.counter_text.set(f'出力先ディレクトリが選択されていません')
+        model.message.set(f'出力先ディレクトリが選択されていません')
         return
 
     time_conf_dict = {}
@@ -41,8 +36,7 @@ def execute_upload(config_path, input_path, output_path, model, button, *args):
                                            input_path,
                                            output_path,
                                            model.flag,
-                                           model.count,
-                                           model.total,),
+                                           model.message),
                                      kwargs=time_conf_dict)
     upload_thread.start()
 

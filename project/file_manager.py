@@ -82,7 +82,7 @@ class FileManager:
         self.load_config_file(f'>> {image_path} to {save_path}')
         return True
 
-    def load_movie(self, count, total, movie_path, tmp_path, file_name='tmp_name', **kwargs):
+    def load_movie(self, message, movie_path, tmp_path, file_name='tmp_name', **kwargs):
         if not self.file_dir_check(movie_path):
             return False
 
@@ -100,12 +100,13 @@ class FileManager:
 
         self.log.info(f'>> start time : {str(fps * start_time)} \t skip time : {fps * skip_time}')
 
-        total.value = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-
+        total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        count = 0
         # 最初何秒飛ばすか
         for _ in tqdm(range(0, fps * start_time)):
             ret = cap.grab()
-            count.value += 1
+            count += 1
+            message.set(f'動画分解中　： ({str(count)} / {str(total)})')
             if ret is False:
                 break
 
@@ -115,7 +116,8 @@ class FileManager:
             skip_frame = 1
 
         for i in tqdm(range(fps * start_time, fps * end_time)):  # フレーム数分回す
-            count.value += 1
+            count += 1
+            message.set(f'動画分解中　： ({str(count)} / {str(total)})')
             # スキップするフレーム数によって保存するか決める
             if i % skip_frame is 0:
                 ret, frame = cap.read()

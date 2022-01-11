@@ -13,8 +13,8 @@ class Application(tk.Frame):
 
         config_path = './config.ini'
 
-        self.ulm = UploadSystemModel()
-        self.dlm = UploadSystemModel()
+        # self.ulm = UploadSystemModel()
+        # self.dlm = UploadSystemModel()
 
         self.master.geometry("580x320")
         self.master.title('ファイルアップロード')
@@ -33,7 +33,7 @@ class Application(tk.Frame):
         # self.notebook.add(self.tab_two, text="download")
         # self.notebook.add(self.tab_three, text="config")
 
-        self.upload_view = UploadSystemView(self.tab_one, self.ulm, config_path)
+        self.upload_view = UploadSystemView(self.tab_one, config_path)
         # self.download_view = DownloadSystemView(self.tab_two, self.dlm)
         # self.config_view = ConfigSystemView(self.tab_three, config_path)
 

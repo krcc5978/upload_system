@@ -3,6 +3,7 @@ import re
 import tkinter as tk
 from tkinter import filedialog
 from project.controller.upload_system_controller import execute_upload
+from project.model.upload_system_model import UploadSystemModel
 from project.model.config_system_model import ConfigSystemModel
 
 
@@ -52,8 +53,8 @@ class InitParts:
 
 class UploadSystemView:
 
-    def __init__(self, master, ulm, config_path):
-        # self.config = ConfigSystemModel(config_path)
+    def __init__(self, master, config_path):
+        ulm = UploadSystemModel()
 
         self.input = InitParts(master, '入力ファイル', 0, 0, (10, 0), (10, 0), scroll=True, ref_button=True)
         self.output = InitParts(master, '出力先', 3, 0, (10, 0), (10, 0), dir_flag=True, scroll=True, ref_button=True)
@@ -62,7 +63,7 @@ class UploadSystemView:
         self.skip_time = InitParts(master, 'スキップフレーム', 6, 0, (10, 0), (10, 0), width=10, num_flag=True)
         self.end_time = InitParts(master, '終了時間[s]', 7, 0, (10, 0), (10, 0), width=10, num_flag=True)
 
-        self.counter_label = tk.Label(master, textvariable=ulm.counter_text, font=('Helvetica', 10))
+        self.counter_label = tk.Label(master, textvariable=ulm.message, font=('Helvetica', 10))
         self.counter_label.grid(row=8, column=1, sticky=tk.E, padx=(10, 0))
 
         self.execute_button = tk.Button(master, text=u'実行', font=('Helvetica', 8),
@@ -75,4 +76,7 @@ class UploadSystemView:
                                                                        self.skip_time.entry.get(),
                                                                        self.end_time.entry.get(),
                                                                        ))
-        self.execute_button.grid(row=8, column=2, padx=(10, 0), sticky=tk.W)
+        self.execute_button.grid(row=8, column=2, padx=(10, 0), sticky=tk.E)
+
+        # self.finish_button = tk.Button(master, text=u'終了', font=('Helvetica', 8))
+        # self.finish_button.grid(row=8, column=2, padx=(10, 0), sticky=tk.W)
